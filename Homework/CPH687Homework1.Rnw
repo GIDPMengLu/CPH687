@@ -1,0 +1,139 @@
+\documentclass{article}
+\usepackage[pdftex]{graphicx}
+\usepackage{rotating}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{multirow}
+\usepackage{fullpage}
+\usepackage{Sweave}
+\usepackage{pdflscape}
+\usepackage{amsmath}   
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{ctable}
+\newcommand{\fg}[3]{\begin{figure}[htbp]%
+        \leavevmode%
+        \centerline{\includegraphics{#1}}%
+        \caption{#3}%
+        \label{#2}%
+        \end{figure}}
+\newcommand{\fgh}[4]{\begin{figure}[htbp]%
+        \leavevmode%
+        \centerline{\includegraphics{#1}}%
+        \caption[#4]{#3}%
+        \label{#2}%
+        \end{figure}}
+\begin{document} 
+\SweaveOpts{concordance=TRUE}
+\SweaveOpts{fig=FALSE, results=hide, echo=TRUE}
+
+\title{CPH 687 Homework 1}
+\author{\small{Meng Lu}}
+\affil{\footnotesize{GIDP Statistics \\ Email: menglu@email.arizona.edu}}
+\maketitle
+
+\section{Problem 1}
+Question:\\
+Proof the following. If $\bm{A}$ is an $n\times p$ matrix and $\bm{B}$
+a $p\times q$ matrix, then the product $\bm{C}=\bm{AB}$ has the
+following properties:\\
+(a) Every column of $\bm{C}$ is a linear combination of columns of $\bm{A}$\\
+(b) Every row of $\bm{C}$ is a linear combination of rows of $\bm{B}$\\
+Proof:\\
+(a)\\
+\begin{align*}
+  &\text{Let }\bm{e_j}\text{ be a }q\times 1 \text{ vector that the
+  }jth\text{ position will be 1 the other places will be zero}\\
+  \text{Then }\bm{c_j}&=\bm{C}\times \bm{e_j}\\
+  &=\bm{AB}\times \bm{e_j}\\
+  &=\bm{A}\times \bm{b_j}\\
+  &=(a_1,a_2, \cdots, a_p)\bm{b_j}\\
+  &=\Sigma_{i=1}^{p}a_ib_{ij}\\
+  &\text{Every column of }\bm{C}\text{ is a linear combination of
+    columns of }\bm{A}
+  .
+  \end{align*}\\
+(b)\\
+\begin{align*}
+ &\text{Let }\bm{e_i}\text{ be a }1\times n \text{ vector that the }ith
+ \text{ position will be 1 and the other places will be zero}\\
+ \text{Then }\bm{c_i}&=\bm{e_i}\times \bm{C}\\
+ &=\bm{e_i}\times \bm{AB}\\
+ &=\bm{a_i}\times \bm{B}\\
+ &=\bm{a_i}(b_1,b_2, \cdots, b_p)^{\prime}\\
+ &=\Sigma_{i=1}^{p}a_{ij}b_j\\
+ &\text{Every row of }\bm{C} \text{ is a linear combination of rows of
+ }\bm{B}
+ .
+ \end{align*}
+ 
+\section{Problem 2}
+Question:\\
+Show directly that if $\bm{A}$ is an $n \times p$ matrix and $\bm{B}$
+is $p \times n$, then\\
+\begin{align*}
+  &(\bm{I_{n}-AB})^{-1}=\bm{I_{n}}+\bm{A}(\bm{I_{p}-BA})^{-1}\bm{B}
+  .
+  \end{align*}\\
+provided the inverses exist. (This verifies a simplified version of
+the Woodbury binomial inverse theorem.)\\
+Proof:\\
+\begin{align*}
+  (\bm{I_n}-(\bm{AB}))(\bm{I_n}+\bm{A}(\bm{I_p}-\bm{BA})^{-1}\bm{B})&=\bm{I_n}+\bm{A}(\bm{I_p}-\bm{BA})^{-1}\bm{B}-\bm{AB}-\bm{ABA}(\bm{I_p}-\bm{BA})^{-1}B\\
+  &=\bm{I_n}-\bm{AB}+\bm{A}[(\bm{I_p}-\bm{BA})^{-1}-\bm{BA}(\bm{I_p}-\bm{BA})^{-1}]\bm{B}\\
+  &=\bm{I_n}-\bm{AB}+\bm{A}(\bm{I_p}-\bm{BA})(\bm{I_p}-\bm{BA})^{-1}\bm{B}\\
+  &=\bm{I_n}-\bm{AB}+\bm{AB}=\bm{I_n}\\
+  \therefore (\bm{I_{n}-AB})^{-1}&=\bm{I_{n}}+\bm{A}(\bm{I_{p}-BA})^{-1}\bm{B}
+  .
+  \end{align*}
+  
+  
+     
+\section{Problem 3}
+Question:\\
+Verify that the Moore-Penrose inverse $\bm{A^{+}}$ of a symmetric
+matrix $\bm{A}$ is symmetric. (Thus, $\bm{A^{+}}$ is also a
+Moore-Penrose inverse of $\bm{A}$)\\
+Proof:\\
+\begin{align*}
+  &\bm{AA^{+}A}=A\Rightarrow \bm{AA^{+^{\prime}}A}=\bm{A}\\
+  &\bm{A^{+}AA^{+}}=\bm{A^{+}}\Rightarrow \bm{A^{+^{\prime}}AA^{+^{\prime}}}=\bm{A^{+^{\prime}}}\\
+  &(\bm{AA^{+}})^{\prime}=\bm{AA^{+}}\Rightarrow \bm{A^{+^{\prime}}A}=(\bm{A^{+^{\prime}}A})^{\prime}\\
+  &(\bm{A^{+}A})^{\prime}=\bm{A^{+}A}\Rightarrow \bm{AA^{+^{\prime}}}=(\bm{AA^{+^{\prime}}})^{\prime}
+  .
+  \end{align*}
+  
+\section{Problem 4}
+Question:\\
+Use the fact that $r(\bm{AB})\leq \min(r(\bm{A}), r(\bm{B}))$, show that\\
+\begin{align*}
+  r(\bm{A})=r(\bm{PA}), r(\bm{A})=r(\bm{AQ})
+  .
+  \end{align*}\\
+if $\bm{P}$ and $\bm{Q}$ are invertible matrices.\\
+Proof:\\
+\begin{align*}
+  &r(\bm{PA})\leq \min(r(\bm{A}),r(\bm{P}))\leq r(\bm{A})\\
+  &\because \bm{A}=(\bm{P})^{-1}\bm{PA}\\
+  &\therefore r(\bm{A})=r((\bm{P})^{-1}\bm{PA})\leq
+  \min(r((\bm{P})^{-1}),r(\bm{PA}))\leq r(\bm{PA})\\
+  &\therefore r(\bm{A})=r(\bm{PA})\text{ if }\bm{P}\text{ is
+    invertible matrix}
+  .
+  \end{align*}
+  
+\begin{align*}
+  &r(\bm{AQ})\leq \min(r(\bm{A}),r(\bm{Q}))\leq r(\bm{A})\\
+  &\because \bm{A}=\bm{AQ} (\bm{Q})^{-1}\\
+  &\therefore r(\bm{A})=r(\bm{AQ}(\bm{Q})^{-1})\leq
+  \min(r((\bm{Q})^{-1}),r(\bm{AQ}))\leq r(\bm{AQ})\\
+  &\therefore r(\bm{A})=r(\bm{AQ})\text{ if }\bm{Q}\text{ is
+    invertible matrix}
+  .
+  \end{align*}
+  
+      
+          
+\end{document}

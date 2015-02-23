@@ -1,0 +1,196 @@
+\documentclass{article}
+\usepackage[pdftex]{graphicx}
+\usepackage{rotating}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{fullpage}
+\usepackage{Sweave}
+\usepackage{pdflscape}
+\usepackage{amsmath}   
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{ctable}
+\newcommand{\fg}[3]{\begin{figure}[htbp]%
+        \leavevmode%
+        \centerline{\includegraphics{#1}}%
+        \caption{#3}%
+        \label{#2}%
+        \end{figure}}
+%\fgh{basefilename}{label}{caption}{short caption for TOC}
+\newcommand{\fgh}[4]{\begin{figure}[htbp]%
+        \leavevmode%
+        \centerline{\includegraphics{#1}}%
+        \caption[#4]{#3}%
+        \label{#2}%
+        \end{figure}}
+\begin{document} 
+\SweaveOpts{concordance=TRUE}
+\SweaveOpts{fig=FALSE, results=hide, echo=TRUE}
+
+\title{STAT564 Homework 7}
+%\author[1]{\small{Bruce Barber}}
+\author{\small{Meng Lu}}
+
+\affil{\footnotesize{GIDP Statistics \\ Email: menglu@email.arizona.edu}}
+%\affil[2]{\footnotesize{Department of Pediatric, The University of Arizona}}
+%\affil[2]{\footnotesize{Statistical Consulting Laboratory \\ email: zlu@arizona.edu}}
+
+\maketitle
+\section{Problem 3.20(a)}
+Question: \\ 
+Let the random variable $X$ have the pdf\\
+\begin{align*}
+  f(x)=\frac{2}{\sqrt{2\pi}}e^{-x^2/2}, 0<x<\infty
+  .
+  \end{align*}
+(a)Find the mean and variance of $X$.\\
+(This distribution is sometimes called a folded normal.)\\
+Solution:\\
+\begin{align*}
+  &EX=\int_{0}^{\infty}x\frac{2}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}\,dx=\frac{2}{\sqrt{2\pi}}(-e^{-\frac{x^2}{2}}|_{0}^{\infty}=\frac{2}{\sqrt{2\pi}}\\
+  &VarX=\int_{0}^{\infty}x^2\frac{2}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}\,dx-(EX)^2\\
+  &\text{If }Y\sim N(0,1)\\
+  &\text{Then }VarY=EY^2-(EY)^2=1\\
+  &EY^2=\int_{-\infty}^{\infty}y^2\frac{1}{\sqrt{2\pi}}e^{-\frac{y^2}{2}}\,dy=1\\
+  &VarX=2\times \frac{1}{2}\int_{-\infty}^{\infty}x^2\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}\,dx-(EX)^2=1-(\frac{2}{\sqrt{2\pi}})^2=\frac{\pi-2}{\pi}
+  .
+  \end{align*}
+  
+
+
+               
+\section{Problem 3.23}
+Question:\\ 
+The pareto distribution, with parameters $\alpha \text{ and }\beta$,
+has pdf\\
+\begin{align*}
+  f(x)=\frac{\beta \alpha^{\beta}}{x^{\beta +1}}, \alpha<x<\infty,
+  \alpha>0, \beta>0
+  .
+  \end{align*}
+(a)Verify that $f(x)$ is a pdf\\
+(b)Derive the mean and variance of this distribution.\\
+(c)Prove that the variance does not exist if $\beta \leq 2$\\
+Solution:\\
+(a)\\
+\begin{align*}
+  &\because \alpha<x<\infty, \alpha>0, \beta>0\\
+  &\therefore f(x)>0\\
+  &\int_{\alpha}^{\infty}f(x)=\int_{\alpha}^{\infty}\frac{\beta \alpha^{\beta}}{x^{\beta +1}}\,dx=\beta \alpha^{\beta}\int_{\alpha}^{\infty}x^{-\beta-1}\,dx=-\alpha^{\beta}x^{-\beta}|_{\alpha}^{\infty}=\alpha^{\beta}\times \alpha^{-\beta}=1
+  .
+  \end{align*}
+(b)\\
+\begin{align*}
+  &EX=\int_{\alpha}^{\infty}x\frac{\beta \alpha^{\beta}}{x^{\beta +1}}\,dx=\beta \alpha^{\beta}\int_{\alpha}^{\infty}x^{-\beta}\,dx=\frac{\beta \alpha^{\beta}}{1-\beta}x^{1-\beta}|_{\alpha}^{\infty}\\
+  &\text{If }0<\beta \leq 1\text{ then }EX \text{ does not exist}\\
+  &\text{If }\beta>1\text{ then }\\
+  &EX=\frac{\beta \alpha^{\beta}}{\beta-1}\alpha^{1-\beta}=\frac{\alpha \beta}{\beta-1}\\
+  &EX^2=\int_{\alpha}^{\infty}x^2\frac{\beta \alpha^{\beta}}{x^{\beta +1}}\,dx=\beta \alpha^{\beta}\int_{\alpha}^{\infty}x^{-\beta+1}\,dx=\frac{\beta \alpha^{\beta}}{2-\beta}x^{2-\beta}|_{\alpha}^{\infty}\\
+  &\text{If }0<\beta \leq 2\text{ then }EX^2 \text{ does not exist}\\
+  &\text{If }\beta>2\text{ then }EX^2=\frac{\beta \alpha^{\beta}}{\beta-2}\alpha^{2-\beta}=\frac{\beta \alpha^2}{\beta-2}\\
+  &VarX=EX^2-(EX)^2=\frac{\beta \alpha^2}{\beta-2}-(\frac{\alpha \beta}{\beta-1})^2
+  .
+  \end{align*}
+  
+(c)\\
+From the results of question (b), the variance does not exits if
+$\beta \leq 2$\\
+
+
+ 
+\section{Problem 3.24(b)(c)}
+Question:\\ 
+Many "named" distributions are special cases if the more common
+distributions already discussed. For each of the following named
+distributions derive the form of the pdf, verify that it is a pdf, and
+calculate the mean and variance.\\
+(b)If $X\sim$ exponential$(\beta)$, then $Y=(2X/\beta)^{1/2}$ has the
+Rayleigh dsitribution.\\
+(c)If $X\sim$ gamma$(a,b)$, then $Y=1/X$ has the inverted gamma
+$IG(a,b)$ distribution.\\
+(This distribution is useful in Bayesian estimation of
+variances; see Exercise 7.23.)\\
+Solution:\\
+(b)\\
+\begin{align*}
+  &F_Y(y)=P(Y\leq y)=P(\sqrt{\frac{2X}{\beta}}\leq y)=P(X\leq \frac{\beta y^2}{2})=\int_{0}^{\frac{\beta y^2}{2}}\frac{1}{\beta}e^{-\frac{x}{\beta}}\,dx\\
+  &\therefore f_Y(y)=\beta y\times \frac{1}{\beta}e^{-\frac{y^2}{2}}=ye^{-\frac{y^2}{2}}, y>0\\
+  &\because y>0 \therefore f_Y(y)>0\\
+  &\int_{0}^{\infty}f_Y(y)=\int_{0}^{\infty}ye^{-\frac{y^2}{2}}\,dy=-e^{-\frac{y^2}{2}}|_{0}^{\infty}=1\\
+  &\therefore f_Y(y)=ye^{-\frac{y^2}{2}}, y>0, \text{ is a pdf}\\
+  &EY=\int_{0}^{\infty}y^2e^{-\frac{y^2}{2}}\,dx\\
+  &\text{If }X\sim N(0,1) \text{ then }\\
+  &EX^2=\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}}x^2e^{-\frac{x^2}{2}}\,dx=1\\
+  &\therefore \int_{-\infty}^{\infty}x^2e^{-\frac{x^2}{2}}\,dx=\sqrt{2\pi}\\
+  &\therefore \int_{0}^{\infty}x^2e^{-\frac{x^2}{2}}\,dx=\sqrt{\frac{\pi}{2}}\\
+  &\therefore EY=\sqrt{\frac{\pi}{2}}\\
+  &EY^2=\int_{0}^{\infty}y^3e^{-\frac{y^2}{2}}\,dx=\int_{0}^{\infty}y^2e^{-\frac{y^2}{2}}\,d\frac{y^2}{2}\\
+  &\text{Let }\frac{y^2}{2}=t \text{ then }\\
+  &\int_{0}^{\infty}y^2e^{-\frac{y^2}{2}}\,d\frac{y^2}{2}=\int_{0}^{\infty}2te^{-t}\,dt=-2te^{-t}|_0^{\infty}+2\int_{0}^{\infty}e^{-t}\,dt=-2e^{-t}|_{0}^{\infty}=2\\
+  &VarY=EY^2-(EY)^2=2-\frac{\pi}{2}=\frac{4-\pi}{2}
+  .
+  \end{align*}
+  
+(c)\\
+\begin{align*}
+  &F_Y(y)=P(Y\leq y)=P(\frac{1}{X}\leq y)=P(X\geq \frac{1}{y})=\int_{\frac{1}{y}}^{\infty}\frac{1}{\beta^{\alpha}\Gamma(\alpha)}e^{-x/\beta}x^{\alpha-1}\,dx\\
+  &\because f_Y(y)=F_Y^{\prime}(y) \\
+  \therefore f_Y(y)&=\frac{1}{y^{\alpha+1}}\frac{1}{\beta^{\alpha}\Gamma(\alpha)}e^{-\frac{1}{y\beta}}\\
+  \int_{0}^{\infty}\frac{1}{y^{\alpha+1}}\frac{1}{\beta^{\alpha}\Gamma(\alpha)}e^{-\frac{1}{y\beta}}\,dy&=\int_{0}^{\infty}t^{\alpha-1}\frac{1}{\beta^{\alpha}\Gamma(\alpha)}e^{-\frac{t}{\beta}}\\
+&=\frac{1}{\beta^{\alpha}\Gamma(\alpha)}\int_{0}^{\infty}t^{\alpha-1}e^{-\frac{t}{\beta}}\\
+&=\frac{1}{\beta^{\alpha}\Gamma(\alpha)}\beta^{\alpha}\Gamma(\alpha)\\
+&=1\\
+\therefore f_Y(y)&=\frac{1}{y^{\alpha+1}}\frac{1}{\beta^{\alpha}\Gamma(\alpha)}e^{-\frac{1}{y\beta}}\\ \text{ is a pdf}\\
+  &EY=\int_{0}^{\infty}\frac{1}{x}\frac{1}{\beta^{\alpha}\Gamma(\alpha)}e^{-\frac{x}{\beta}}x^{\alpha-1}\,dx=\frac{1}{\beta^{\alpha}\Gamma(\alpha)}\int_{0}^{\infty}e^{-\frac{x}{\beta}}x^{\alpha-2}\,dx\\
+  &\text{Let }\frac{x}{\beta}=t \text{ then }dx=\beta dt\\
+  &\therefore \frac{1}{\beta^{\alpha}\Gamma(\alpha)}\int_{0}^{\infty}e^{-\frac{x}{\beta}}x^{\alpha-2}\,dx=\frac{1}{\beta \Gamma(\alpha)}\int_{0}^{\infty}e^{-t}t^{\alpha-2}\,dt=\frac{1}{\beta \Gamma(\alpha)}\Gamma(\alpha-1)=\frac{1}{\beta(\alpha-1)}
+  .
+  \end{align*}
+
+\begin{align*}
+  &EY^2=\int_{0}^{\infty}\frac{1}{x^2}\frac{1}{\beta^{\alpha}\Gamma(\alpha)}e^{-\frac{x}{\beta}}x^{\alpha-1}\,dx=\frac{1}{\beta^{\alpha}\Gamma(\alpha)}\int_{0}^{\infty}e^{-\frac{x}{\beta}}x^{\alpha-3}\,dx\\
+  &\text{Let }\frac{x}{\beta}=t\text{ then }dx=\beta dt\\
+  &\therefore \frac{1}{\beta^{\alpha}\Gamma(\alpha)}\int_{0}^{\infty}e^{-\frac{x}{\beta}}x^{\alpha-3}\,dx=\frac{1}{\beta^2 \Gamma(\alpha)}\int_{0}^{\infty}e^{-t}t^{\alpha-3}\,dt=\frac{1}{\beta^2 \Gamma(\alpha)}\Gamma(\alpha-2)=\frac{1}{\beta^2(\alpha-1)(\alpha-2)}\\
+  &\therefore VarY=EY^2-(EY)^2=\frac{1}{\beta^2(\alpha-1)^2(\alpha-2)} 
+  .
+  \end{align*}
+  
+  
+
+
+\section{Problem 3.26(a)(b)}
+Question:\\
+Verify that the following pdfs have the indicated hazard functions(see
+Exercise 3.25).\\
+(a)If $T\sim$ exponential$(\beta)$, then $h_T(t)=1/\beta$\\
+(b)If $T\sim$ Weibull$(\gamma,\beta)$, then $h_T(t)=(\gamma /\beta)t^{\gamma-1}$\\
+Solution:\\
+(a)\\
+\begin{align*}
+  f_T(t)&=\frac{1}{\beta}e^{-\frac{t}{\beta}}\\
+  F_T(t)&=\int_{0}^{t}\frac{1}{\beta}e^{-\frac{x}{\beta}}\,dx=-e^{-\frac{x}{\beta}}|_{0}^{t}=1-e^{-\frac{t}{\beta}}\\
+  \because h_T(t)&=\frac{f_T(t)}{1-F_T(t)}\\
+  \therefore h_T(t)&=\frac{\frac{1}{\beta}e^{-\frac{t}{\beta}}}{1-(1-e^{-\frac{t}{\beta}})}=\frac{1}{\beta}
+  .
+  \end{align*}
+  
+(b)\\
+\begin{align*}
+  &f_T(t)=\frac{\gamma}{\beta}t^{\gamma-1}e^{-\frac{t^{\gamma}}{\beta}}\\
+  &F_T(t)=\int_{0}^{t}\frac{\gamma}{\beta}x^{\gamma-1}e^{-\frac{x^{\gamma}}{\beta}}\,dx\\
+  &\text{Let }\frac{x^r}{\beta}=y\text{ then }x=(\beta y)^{1/\gamma}\\
+  &\therefore dx=\frac{1}{\gamma}\beta^{\frac{1}{\gamma}}t^{\frac{1}{\gamma}-1}dt\\
+  &\therefore F_Y(y)=\int_{0}^{\frac{t^{\gamma}}{\beta}}\frac{\gamma}{\beta}(\beta t)^{1-\frac{1}{\gamma}}\frac{1}{\gamma}\beta^{\frac{1}{\gamma}}t^{\frac{1}{\gamma}-1}e^{-y}\,dy=-e^{-y}|_0^{\frac{t^{\gamma}}{\beta}}=1-e^{-\frac{t^{\gamma}}{\beta}}\\
+  &\therefore h_T(t)=\frac{f_T(t)}{1-F_T(t)}=\frac{\frac{\gamma}{\beta}t^{\gamma-1}e^{-\frac{t^{\gamma}}{\beta}}}{e^{-\frac{t^{\gamma}}{\beta}}}=\frac{\gamma}{\beta}t^{\gamma-1}
+   .
+   \end{align*}
+  
+
+
+  
+
+
+
+\end{document}

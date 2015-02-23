@@ -1,0 +1,158 @@
+\documentclass{article}
+\usepackage[pdftex]{graphicx}
+\usepackage{rotating}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{multirow}
+\usepackage{fullpage}
+\usepackage{Sweave}
+\usepackage{pdflscape}
+\usepackage{amsmath}   
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{ctable}
+\newcommand{\fg}[3]{\begin{figure}[htbp]%
+        \leavevmode%
+        \centerline{\includegraphics{#1}}%
+        \caption{#3}%
+        \label{#2}%
+        \end{figure}}
+%\fgh{basefilename}{label}{caption}{short caption for TOC}
+\newcommand{\fgh}[4]{\begin{figure}[htbp]%
+        \leavevmode%
+        \centerline{\includegraphics{#1}}%
+        \caption[#4]{#3}%
+        \label{#2}%
+        \end{figure}}
+\begin{document} 
+\input{CPH687Homework4-concordance}
+
+
+\title{CPH687 Homework 4}
+%\author[1]{\small{Bruce Barber}}
+\author{\small{Meng Lu}}
+
+\affil{\footnotesize{GIDP Statistics \\ Email: menglu@email.arizona.edu}}
+%\affil[2]{\footnotesize{Department of Pediatric, The University of Arizona}}
+%\affil[2]{\footnotesize{Statistical Consulting Laboratory \\ email: zlu@arizona.edu}}
+
+\maketitle
+\section{Problem 1}
+Question: \\ 
+Let $y_i$ have mean $\mu$ and variance $\sigma^2$, which are
+scalars. Find the expection of the estimator of $\sigma^2$
+\begin{align*}
+  &S^2=\frac{1}{n-1}\sum_{i=1}^{n}(y_i-\bar{y})^2
+  .
+  \end{align*}
+using matrix notations $\bm{y_{n\times
+    1}}=(y_1,y_2,\cdots,y_n)^{\prime}$ and $\bar{y}=\bm{1_n^{\prime}y}/n$\\     
+Solution:\\
+\begin{align*}
+  S^2&=\frac{1}{n-1}\sum_{i=1}^{n}(y_i-\bar{y})^2\\
+  &=\frac{1}{n-1}(\sum_{i=1}^{n}y_i^2-n(\bar{y})^2)\\
+  E(S^2)&=\frac{1}{n-1}(\sum_{i=1}^{n}E(y_i^2)-nE(\bar{y}^2))\\
+  &=\frac{1}{n-1}(\sum_{i=1}^{n}(Var(y_i)+(E(y_i))^2)-n(Var(\bar)+(E(\bar{y}))^2))\\
+  &=\frac{1}{n-1}(n\sigma^2+n\mu^2-\sigma^2-n\mu^2)\\
+  &=\sigma^2 
+  .
+  \end{align*}
+                
+\section{Problem 2}
+Question:\\ 
+Let $\bm{y} \sim N(\bm{\mu},\bm{\Sigma})$ where $\Sigma$ is
+p.d. Verify that the MGF of $\bm{y}$ is 
+\begin{align*}
+  &M_{\bm{y}}(\bm{t})=exp(\bm{t^{\prime}\mu}+\frac{1}{2}\bm{t^{\prime}\Sigma
+  t})
+.
+\end{align*}
+Solution:\\
+\begin{align*}
+  M_{\bm{y}}(\bm{t})&=E(e^{\bm{t^{\prime}y}})\\
+  &=C\int_{-\infty}^{\infty}e^{\bm{t^{\prime}y}}e^{-\frac{1}{2}\bm{(y-\mu)^{\prime}}\bm{\Sigma^{-1}(y-\mu)}}\,d\bm{y}\\
+  C&=\frac{1}{(2\pi)^{-n/2}}|\bm{\Sigma}|^(-1/2)\\
+  &=\int_{-\infty}^{\infty}e^{-\frac{1}{2}\bm{((y-\mu)^{\prime}\Sigma^{-1}(y-\mu)-2t^{\prime}y)}}\,d\bm{y}\\
+ \bm{(y-\mu)^{\prime}\Sigma^{-1}(y-\mu)}-2\bm{t^{\prime}y}&=\bm{y^{\prime}\Sigma^{-1}y}-2\bm{y^{\prime}\Sigma^{-1}\mu+\mu^{\prime}\Sigma^{-1}\mu-2t^{\prime}y}\\
+  &=\bm{y^{\prime}\Sigma^{-1}y-2y^{\prime}\Sigma^{-1}\mu+\mu^{\prime}\Sigma^{-1}\mu-2y^{\prime}\Sigma^{-1}\Sigma
+  t}\\
+  &=\bm{y^{\prime}\Sigma^{-1}y-2y^{\prime}\Sigma^{-1}(\mu+\Sigma t)+\mu^{\prime}\Sigma^{-1}\mu}\\
+  &=\bm{[y-(\mu+\Sigma t)]^{\prime}\Sigma^{-1}[y-(\mu+\Sigma
+  t)]-(\mu+\Sigma t)^{\prime}\Sigma^{-1}(\mu+\Sigma t)+\mu^{\prime}\Sigma^{-1}\mu}\\
+  &=\bm{[y-(\mu+\Sigma t)]^{\prime}\Sigma^{-1}[y-(\mu+\Sigma
+  t)]-(2\mu^{\prime}t+t^{\prime}\Sigma t)}\\
+  &=\bm{[y-(\mu+\Sigma t)]^{\prime}\Sigma^{-1}[y-(\mu+\Sigma
+  t)]-(2t^{\prime}mu+t^{\prime}\Sigma t)}\\
+  \therefore M_{\bm{y}}(\bm{t})&=C\int_{-\infty}^{\infty}e^{\bm{([y-(\mu+\Sigma t)]^{\prime}\Sigma^{-1}[y-(\mu+\Sigma
+  t)]-(2t^{\prime}mu+t^{\prime}\Sigma t))}}\,d\bm{y}\\
+&=e^{\bm{t^{\prime}\mu}+\frac{1}{2}\bm{t^{\prime}\Sigma t}}C\int_{-\infty}^{\infty}e^{-\frac{1}{2}\bm{([y-(\mu+\Sigma t)]^{\prime}\Sigma^{-1}[y-(\mu+\Sigma
+  t)])}}\,d\bm{y}\\
+&=e^{\bm{t^{\prime}\mu}+\frac{1}{2}\bm{t^{\prime}\Sigma t}}
+  .
+  \end{align*}
+       
+         
+                   
+\section{Problem 3}
+Question:\\
+Let $\bm{A_{r \times n}}$ be a matrix of constants. Verify that
+$\bm{Ay} \sim N(\bm{A\mu},\bm{A\Sigma A^{\prime}})$.\\     
+Solution:\\
+\begin{align*}
+  E(\bm{Ay})&=\bm{A}E(\bm{y})=\bm{A\mu}\\
+  Var(\bm{Ay})&=\bm{A}Var(\bm{y})\bm{A^{\prime}}=\bm{A\Sigma A^{\prime}}\\
+  f(\bm{y}|\bm{\mu}, \bm{\Sigma})&=\frac{1}{(2\pi)^{n/2}|\bm{\Sigma}|^{-1/2}}exp[-\frac{1}{2}\bm{(y-\mu)^{\prime}\Sigma^{-1}(y-\mu)}]\\
+  &\bm{x}=\bm{Ay}\rightarrow \bm{y}=\bm{A^{-1}x}\\
+  f(\bm{A^{-1}x}|\bm{\mu}, \bm{\Sigma})&=\frac{1}{(2\pi)^{n/2}|\bm{A\Sigma A^{\prime}}|^{-1/2}}exp[-\frac{1}{2}\bm{(A^{-1}x-\mu)^{\prime}\Sigma^{-1}(A^{-1}x-\mu)}]\\
+  &=\frac{1}{(2\pi)^{n/2}|\bm{A\Sigma A^{\prime}}|^{-1/2}}exp[-\frac{1}{2}\bm{(A^{-1}x-A^{-1}A\mu)^{\prime}\Sigma^{-1}(A^{-1}x-A^{-1}A\mu)}]\\
+  &=\frac{1}{(2\pi)^{n/2}|\bm{A\Sigma A^{\prime}}|^{-1/2}}exp[-\frac{1}{2}\bm{(A^{-1}(x-A\mu))^{\prime}\Sigma^{-1}A^{-1}(x-A\mu)}]\\
+  &=\frac{1}{(2\pi)^{n/2}}|\bm{A\Sigma A^{\prime}}|^{-1/2}exp[-\frac{1}{2}\bm{(x-A\mu)^{\prime}(A\Sigma A^{\prime})^{-1}(x-A\mu)}]\\
+  \therefore &\bm{Ay} \sim N(\bm{A\mu},\bm{A\Sigma A^{\prime}})
+  .
+  \end{align*}
+       
+
+         
+\section{Problem 4}
+Question:\\
+If $\bm{X}$ and $\bm{Y}$ are n-dimensional vectors with independent
+multivariate normal distributions, prove that $a\bm{X}+b\bm{Y}$ is
+also multivariate normal.\\
+Solution:\\
+\begin{align*}
+  M_{a\bm{X}+b\bm{Y}}(\bm{t})&=E(e^{\bm{t^{\prime}}(a\bm{X}+b\bm{Y})})\\
+  &=E(e^{a\bm{t^{\prime}X}}e^{b\bm{t^{\prime}Y}})\\
+  \because &\bm{X} \text{ and }\bm{Y} \text{ are n-dimensional vectors with
+    independent multivariate normal distributions}\\
+  \therefore M_{a\bm{X}+b\bm{Y}}(\bm{t})&=E(e^{a\bm{t^{\prime}X}}e^{b\bm{t^{\prime}Y}})\\
+  &=E(e^{a\bm{t^{\prime}X}})E(e^{b\bm{t^{\prime}Y}})\\
+  &=exp(a\bm{t^{\prime}\mu_X}+\frac{1}{2}a^2\bm{t^{\prime}\Sigma_Xt}) exp(b\bm{t^{\prime}\mu_Y}+\frac{1}{2}b^2\bm{t^{\prime}\Sigma_Yt})\\
+  &=exp(\bm{t^{\prime}}(a\bm{\mu_X}+b\bm{\mu_Y})+\frac{1}{2}\bm{t^{\prime}}(a^2\bm{\Sigma_X}+b^2\bm{\Sigma_Y}))\\
+  \therefore &a\bm{X}+b\bm{Y} \text{ is also multivariate normal with
+    mean }a\bm{\mu_X}+b\bm{\mu_Y}\text{ and variance }a^2\bm{\Sigma_X}+b^2\bm{\Sigma_Y}
+  .
+  \end{align*}
+
+
+\section{Problem 5}
+Question:\\
+If $\bm{Y} \sim N_2(\bm{0},\bm{\Sigma})$, where
+$\bm{\Sigma}=(\sigma_{ij})$, prove that
+\begin{align*}
+  &(\bm{Y^{\prime}\Sigma^{-1}Y}-\frac{Y_1^2}{\sigma_{11}}) \sim \chi_1^2
+  .
+  \end{align*}
+
+Solution:\\
+\begin{align*}
+  \bm{Y^{\prime}\Sigma^{-1}Y}&=\bm{Y^{\prime}\Sigma^{-1/2}\Sigma^{-1/2}Y}\\
+  &=\bm{(\Sigma^{-1/2}Y)^{\prime}\Sigma^{-1/2}Y}\\
+  \text{Let }\bm{Z}=\bm{\Sigma^{-1/2}Y}\\
+  Var(\bm{Z})&=I_2\\
+  \text{From the Problem 3, we know that }\bm{Z} \sim N_2(\bm{0,I})\\
+  \therefore (\bm{Z^{\prime}Z}-\frac{Y_1^2}{\sigma_{11}}) \sim \chi_1^2
+  .
+  \end{align*}
+\end{document}

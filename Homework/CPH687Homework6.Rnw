@@ -1,0 +1,241 @@
+\documentclass{article}
+\usepackage[pdftex]{graphicx}
+\usepackage{rotating}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{fullpage}
+\usepackage{Sweave}
+\usepackage{pdflscape}
+\usepackage{amsmath}   
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{ctable}
+\newcommand{\fg}[3]{\begin{figure}[htbp]%
+        \leavevmode%
+        \centerline{\includegraphics{#1}}%
+        \caption{#3}%
+        \label{#2}%
+        \end{figure}}
+%\fgh{basefilename}{label}{caption}{short caption for TOC}
+\newcommand{\fgh}[4]{\begin{figure}[htbp]%
+        \leavevmode%
+        \centerline{\includegraphics{#1}}%
+        \caption[#4]{#3}%
+        \label{#2}%
+        \end{figure}}
+\begin{document} 
+\SweaveOpts{concordance=TRUE}
+\SweaveOpts{fig=FALSE, results=hide, echo=TRUE}
+
+\title{STAT564 Homework 6}
+%\author[1]{\small{Bruce Barber}}
+\author{\small{Meng Lu}}
+
+\affil{\footnotesize{GIDP Statistics \\ Email: menglu@email.arizona.edu}}
+%\affil[2]{\footnotesize{Department of Pediatric, The University of Arizona}}
+%\affil[2]{\footnotesize{Statistical Consulting Laboratory \\ email: zlu@arizona.edu}}
+
+\maketitle
+\section{Problem 3.2}
+Question: \\ 
+A manufacturer receives a lot of 100 parts frim a vendor. The lot will be unacceptable if more than five of the parts are defective. The manufacturer is going to select randomly K parts from the lot for inspection and the lot will be accepted if no defective parts are found in the sample.\\
+(a) How large does K have to be to ensure that the probability that the manufacturer accepteds an unacceotable lot is less than 0.10?\\
+(b) Suppose the manufacturer decides to accept the lot if there is at most one defective in the sample. How large does K have to be ensure that the probability that the manufacturer accepts an unacceptable lot is less than 0.10?\\
+Solution:\\
+<<label=problem2, echo=F,eval=T>>=
+f1<-function(x){choose(6,0)*choose(94,x)/choose(100,x)-0.1}
+fr1 <- uniroot(f1,c(0,100),tol=0.0001)
+function.root1 <- fr1$root
+f2<-function(k){choose(6,0)*choose(94,k)/choose(100,k)+choose(6,1)*choose(94,k-1)/choose(100,k)-0.1}
+fr2 <- uniroot(f2,c(0,100),tol=0.0001)
+function.root2 <- fr2$root
+@ 
+(a)\\
+Let $X$ be the number of defective parts in the sample.\\
+Then $P(X=x|M,N,K)=\frac{\left( \begin{array}{c} M \\ x \end{array}
+  \right) \left( \begin{array}{c} N-M \\ K-x \end{array}
+  \right)}{\left( \begin{array}{c} N \\ K \end{array} \right)},
+x=0,1,\cdots,\min(M,K)$, \\
+where, $N=100, M\text{ is a number which greater than or equal} 6,
+K\text{ is the sample size}$\\
+If $X=0$ then the lot will be accepted.\\
+$P(X=0|100,M,K)=\frac{\left( \begin{array}{c} M \\ 0 \end{array}
+  \right) \left( \begin{array}{c} 100-M \\ K \end{array}
+  \right)}{\left( \begin{array}{c} 100 \\ K \end{array} \right)}$\\
+If $M$ is increasing, then $\left( \begin{array}{c} 100-M \\ K \end{array}
+  \right)$ is discreasing.\\
+So the probability that the lot is accepted is at most
+\begin{align*}
+  P(X=0|6,100,K)&=\frac{\left( \begin{array}{c} 6 \\ 0 \end{array}
+  \right) \left( \begin{array}{c} 94 \\ K \end{array}
+  \right)}{\left( \begin{array}{c} 100 \\ K \end{array} \right)}
+      .
+   \end{align*}
+The function root is ~\Sexpr{round(function.root1,4)}\\
+So the sample size must be at least 32.\\
+(b)\\
+$P(\text{accept lot})=P(X=0 \text{ or }1)$\\
+The probability is at most\\
+\begin{align*}
+  P(X=0\text{ or }1|M=100,N=6,K)=\frac{\left( \begin{array}{c} 6 \\ 0 \end{array}
+  \right) \left( \begin{array}{c} 94 \\ K \end{array}
+  \right)}{\left( \begin{array}{c} 100 \\ K \end{array} \right)}+\frac{\left( \begin{array}{c} 6 \\ 1 \end{array}
+  \right) \left( \begin{array}{c} 94 \\ K-1 \end{array}
+  \right)}{\left( \begin{array}{c} 100 \\ K \end{array} \right)}
+  .
+  \end{align*}
+The function root is ~\Sexpr{round(function.root2,4)}\\
+So the sample size must be at least 51.\\
+The following is R codes:\\
+<<label=problem2, echo=T,eval=F>>=
+f1<-function(k){choose(6,0)*choose(94,k)/choose(100,k)-0.1}
+fr1 <- uniroot(f1,c(0,100),tol=0.0001)
+function.root1 <- fr1$root
+f2<-function(k){choose(6,0)*choose(94,k)/choose(100,k)+choose(6,1)*choose(94,k-1)/choose(100,k)-0.1}
+fr2 <- uniroot(f2,c(0,100),tol=0.0001)
+function.root2 <- fr2$root
+@ 
+    
+                
+\section{Problem 3.5}
+Question:\\ 
+A standard drug is known to be effective in 80\% of the cases in which it is used. A new drug is tested on 100 patients and found to be effective in 85 cases. Is the new drug superior?(Hint: Evaluate the probability of observing 85 or more successes assuming that the new and old drugs are equally effective.)\\
+Solution:\\
+<<label=problem5, echo=F,eval=T>>=
+problem5.X <- c(85:100)
+problem5.Y <- choose(100,problem5.X)*(0.8)^problem5.X*(0.2)^(100-problem5.X)
+probability5 <- sum(problem5.Y)
+@ 
+Let $X$ be the number of effective cases.\\
+If the cases are independent, then $X~\text{binom}(100,0.8)$\\
+$P(X\geq 85)=\Sigma_{x=85}^{100}\left( \begin{array}{c} 100 \\
+    x \end{array} \right)\times (0.8)^x\times (0.2)^{100-x}=~\Sexpr{round(probability5,6)}$\\
+
+ 
+The following is R codes:\\
+<<label=problem5, echo=T,eval=F>>=
+problem5.X <- c(85:100)
+problem5.Y <- choose(100,problem5.X)*(0.8)^problem5.X*(0.2)^(100-problem5.X)
+probability5 <- sum(problem5.Y)
+@ 
+
+\section{Problem 3.7}
+Question:\\ 
+Let the number of chocolate chips in a certain type of cookie have a Poisson distribution. We want the probability that a randomly chosen cookie has at least two chocolate chips to be greater than 0.99. Find the smallest value of the mean of the distrbution that ensures this probability.\\
+<<label=problem7, echo=F,eval=T>>=
+f7<-function(x){exp(-x)*(1+x)-0.01}
+fr7<- uniroot(f7,c(0,10),tol=0.0001)
+function.root7 <-fr7$root 
+@ 
+Solution:\\
+Assume $P(X=k)=\frac{e^{-\lambda}\lambda^k}{k!}$\\
+Let $A$ be the event of at least two chocolate chips, and $X$ be the
+number of chocolate chips\\
+Then $P(A)=P(X\geq 2)=1-P(X=0)-P(X=1)$\\
+$\therefore P(A)=1-\frac{e^{-\lambda}\lambda^0}{0!}-\frac{e^{-\lambda}\lambda^1}{1!}>0.99$\\
+$\therefore \frac{e^{-\lambda}\lambda^0}{0!}+\frac{e^{-\lambda}\lambda^1}{1!}<0.01$\\
+$\therefore e^{-\lambda}(1+\lambda)<0.01$\\
+The root of the above function is ~\Sexpr{round(function.root7,5)}
+
+The following is R codes:\\
+<<label=problem7, echo=T,eval=F>>=
+f7<-function(x){exp(-x)*(1+x)-0.01}
+fr<- uniroot(f7,c(0,10),tol=0.0001)
+function.root7 <-fr7$root 
+@ 
+
+
+\section{Problem 3.9}
+Question:\\
+Oftern, news stories that are reported as startlig "one-in-a-million" coincidences are actually, upon closer examination, not rare events and can even be expected to occur. Afew years ago an elementary school in New York state reported that its incoming kindergarden class contained five ests of twins. This, of course, was reported throughout the state, with a quote from the principal that this was a "statistical impossibility". Was it? Or was it an instance of what Diaconis and Mosteller (1989) call the "law of truly large numbers"? Let's do some calculations.\\
+(a) The probability of a twin birth is approximately $\frac{1}{90}$, and we can assume that an elementary school will have approximately 60 children entering kindergarten(three classed of 20 each). Explain how our "statistically impossible" event can be thought of as the probability of 5 or more successes from a binomial(60,1/90). Is this even rare enough to be newsworthy?\\
+(b)Even if the probability in part (a) is rare enough to be newsworthy, consider that this culd have happened in any school in the county, and in any county in the state, and it still would have been reported exactly the same. (The "law of truly large numbers" is starting to come into play.) New York state has 62 counties, and it is reasonable to assume that each county has five elementary schools. Does the event still qualify as a "statistically impossibility", or is it becoming something that could be expected to occur?\\
+(c)If the probability in part(b) still seens small, consider further that this event could have happened in any one of the 50 states, during any of the last 10 years, and still would have received the same news coverage.\\
+In addition to Diacoinis and Mosteller (1989), see Hanley(1992) for more on coincidences.\\
+Solution:\\
+(a)\\
+<<label=problem9, echo=F,eval=T>>=
+problem9.X <- c(0:4)
+problem9.Y <- choose(60,problem9.X)*(1/90)^problem9.X*(89/90)^(60-problem9.X)
+sum(problem9.Y)
+probability9 <- 1-sum(problem9.Y)
+@ 
+Let $X$ be the number of successes.\\
+Then 
+\begin{align*}
+P(X\geq 5)&=1-P(X<5)=1-P(X=0)-P(X=1)-P(X=2)-P(X=3)-P(X=4)\\
+  &=1-\Sigma_{x=0}^{x=4}\left( \begin{array}{c} 60 \\ x \end{array}
+  \right)(\frac{1}{90})^x(\frac{89}{90})^{60-x}\\
+  &=~\Sexpr{round(probability9,6)}
+  .
+  \end{align*}
+It's very small and may ve rare enough to be newsworthy.\\
+
+The following is R codes:\\
+<<label=problem9, echo=T,eval=F>>=
+problem9.X <- c(0:4)
+problem9.Y <- choose(60,problem9.X)*(1/90)^problem9.X*(89/90)^(60-problem9.X)
+sum(problem9.Y)
+probability9 <- 1-sum(problem9.Y)
+@ 
+(b)\\
+Let $X$ be the number of elementary schools in New York state that
+have 5 or more successes.\\
+Then $X$ is distributed as binomial distrbution, namely, $X~B(310,0.0006)$\\
+Then $P(X\geq 1)=1-P(X=0)=1-\left( \begin{array}{c} 310 \\ 0 \end{array}
+  \right)0.0006^0(1-0.0006)^{310}=1-0.8302=0.1698$\\
+(c)\\
+Let $X$ be the number of elementary schools in New York state during
+any of the last 10 years that have 5 or more successes.\\
+Then $X$ is distributed as binomial distribution, namely, $X~B(500,0.1698)$\\
+$P(X\geq 1)=1-P(X=0)=1-\left( \begin{array}{c} 500 \\ 0 \end{array}
+  \right)0.1698^0(1-0.1698)^{500}=1-3.9\times 10^{-41}\approx 1$\\
+  
+
+\section{Problem 3.15}
+Question:\\
+In Section 3.2 it was claimed that the Poisson($\lambda$) distrbution is the limit of the negative binomial($r,p$) distribution as $r\rightarrow \infty, p\rightarrow 1, \text{ and }r(1-p)\rightarrow \lambda$. Show that under these conditions the mgf of the negative binomial converges to that of the Poisson.\\
+Proof:\\
+\begin{align*}
+  P(Y=y)&=\left( \begin{array}{c} r+y-1 \\ y \end{array}\right)
+  p^r(1-p)^y, y=0,1,\cdots\\
+  M_Y(t)&=\Sigma_{y=0}^{\infty}e^{ty}\left( \begin{array}{c} r+y-1 \\ y \end{array}\right)
+  p^r(1-p)^y\\
+  &=\Sigma_{y=0}^{\infty}\left( \begin{array}{c} r+y-1 \\ y \end{array}\right)[e^t(1-p)]^yp^r\\
+  &=\frac{p^r}{[1-e^t(1-p)]^r}\Sigma_{y=0}^{\infty}\left( \begin{array}{c} r+y-1 \\ y \end{array}\right)[e^t(1-p)]^y [1-e^t(1-p)]^r\\
+  &=\frac{p^r}{[1-e^t(1-p)]^r}
+  .
+  \end{align*}
+\begin{align*}
+  &\because r(1-p)\rightarrow \lambda\\
+  &\therefore p\rightarrow 1-\frac{\lambda}{r}\\
+  \therefore M_Y(t)&=(\frac{p}{1-e^t(1-p)})^r\\
+  &=(\frac{1-\frac{\lambda}{r}}{1-\frac{\lambda e^t}{r}})^r\\
+  \because \log M_Y(t)&=r\log
+  \frac{1-\frac{\lambda}{r}}{1-\frac{\lambda e^t}{r}}\\
+  \therefore \lim_{r\rightarrow \infty}\log M_Y(t)&=\lim_{r\rightarrow \infty}r\log
+  \frac{1-\frac{\lambda}{r}}{1-\frac{\lambda e^t}{r}}\\
+  &=\lambda \lim_{y\rightarrow 0}\frac{\log \frac{1-y}{1-ye^t}}{y}, (y=\frac{\lambda}{r})\\
+  &=\lambda \lim_{y\rightarrow 0}\frac{1-y}{1-ye^t}\frac{-(1-ye^t)+e^t(1-y)}{(1-ye^t)^2}\\
+  &=\lambda \lim_{y\rightarrow 0}\frac{1-y}{1-ye^t}\frac{e^t-1}{(1-ye^t)^2}\\
+  &=\lambda (e^t-1)\\
+  \therefore \lim_{r\rightarrow \infty}M_Y(t)&=e^{\lambda (e^t-1)}\\
+  P(X=x)&=\frac{e^{-\lambda}\lambda^x}{x!}\\
+  M_X(t)&=\Sigma_{y=0}^{\infty}e^{tx}\frac{e^{-\lambda}\lambda^x}{x!}\\
+  &=\Sigma_{y=0}^{\infty}\frac{e^{-\lambda}(\lambda e^t)^x}{x!}\\
+  &=e^{-\lambda}\Sigma_{y=0}^{\infty}\frac{(\lambda e^t)^x}{x!}\\
+  &=e^{-\lambda}e^{\lambda e^t}\\
+  &=e^{\lambda (e^t-1)}
+   .
+   \end{align*}
+   
+  
+
+
+  
+
+
+
+\end{document}

@@ -1,0 +1,308 @@
+\documentclass{article}
+\usepackage[pdftex]{graphicx}
+\usepackage{rotating}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{fullpage}
+\usepackage{Sweave}
+\usepackage{pdflscape}
+\usepackage{amsmath}   
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{ctable}
+\newcommand{\fg}[3]{\begin{figure}[htbp]%
+        \leavevmode%
+        \centerline{\includegraphics{#1}}%
+        \caption{#3}%
+        \label{#2}%
+        \end{figure}}
+%\fgh{basefilename}{label}{caption}{short caption for TOC}
+\newcommand{\fgh}[4]{\begin{figure}[htbp]%
+        \leavevmode%
+        \centerline{\includegraphics{#1}}%
+        \caption[#4]{#3}%
+        \label{#2}%
+        \end{figure}}
+\begin{document} 
+\SweaveOpts{concordance=TRUE}
+\SweaveOpts{fig=FALSE, results=hide, echo=TRUE}
+
+\title{STAT564 Homework 5}
+%\author[1]{\small{Bruce Barber}}
+\author{\small{Meng Lu}}
+
+\affil{\footnotesize{GIDP Statistics \\ Email: menglu@email.arizona.edu}}
+%\affil[2]{\footnotesize{Department of Pediatric, The University of Arizona}}
+%\affil[2]{\footnotesize{Statistical Consulting Laboratory \\ email: zlu@arizona.edu}}
+
+\maketitle
+\section{Problem 2.18}
+Question: \\ 
+Show that if $X$ is a continuous random variable, then\\
+\begin{align*}
+ \min_a E|X-a|=E|X-m|
+.
+\end{align*}
+where $m$ is the median of $X$(see Exercise 2.17)\\
+Proof:\\
+\begin{align*}
+&F(a)=E|X-a|=\int_{-\infty}^{\infty}|X-a|f(x)\,dx=\int_{-\infty}^{a}(a-X)f(x)\,dx+\int_{a}^{\infty}(X-a)f(x)\,dx\\
+&F^{\prime}(a)=(a-a)f(a)+\int_{-\infty}^{a}f(x)\,dx-(a-a)f(a)+\int_{a}^{\infty}(-1)f(x)\,dx\\
+&\text{Let }F^{\prime}(a)=0, \text{ then }\int_{-\infty}^{a}f(x)\,dx=\int_{a}^{\infty}(-1)f(x)\,dx\\
+&\int_{-\infty}^{a}f(x)\,dx=1-\int_{a}^{\infty}f(x)\,dx=\int_{a}^{\infty}f(x)\,dx\\
+&\int_{a}^{\infty}f(x)\,dx=\frac{1}{2}\Rightarrow m\text{ is median}\\
+&\therefore  \min_a E|X-a|=E|X-m|
+.
+\end{align*}
+
+    
+                
+\section{Problem 2.24}
+Question:\\ 
+Compute $EX$ and $VarX$ for each of the following probability distributions.\\
+(a) $f_X(x)=ax^{a-1}, 0<x<1, a>0$\\
+(b) $f_X(x)=\frac{1}{n}, x=1,2, \cdots , n, n>0 \text{ an integer}$\\
+(c) $f_X(x)=\frac{3}{2}(x-1)^2, 0<x<2$\\
+
+Solution:\\
+(a)\\
+\begin{align*}
+  EX&=\int_{0}^{1}xax^{a-1}\,dx=\int_{0}^{1}ax^a\,dx=\frac{a}{a+1}x^{a+1}|_0^1=\frac{a}{a+1}\\
+  EX^2&=\int_{0}^{1}x^2ax^{a-1}\,dx=\int_{0}^{1}ax^{a+1}\,dx=\frac{a}{a+2}x^{a+2}|_0^1=\frac{a}{a+2}\\
+  Var X&=EX^2-(EX)^2=\frac{a}{a+2}-(\frac{a}{a+1})^2=\frac{a}{(a+2)(a+1)^2}
+  .
+  \end{align*}
+(b)\\
+\begin{align*}
+  EX&=\Sigma_{x=1}^{n}x\frac{1}{n}=\frac{1}{n}\frac{(n+1)n}{2}=\frac{n+1}{2}\\
+  EX^2&=\Sigma_{x=1}^{n}x^2\frac{1}{n}=\frac{1}{n}\frac{n(n+1)(2n+1)}{6}=\frac{(n+1)(2n+1)}{6}\\
+  VarX&=EX^2-(EX)^2=\frac{(n+1)(2n+1)}{6}-(\frac{n+1}{2})^2=\frac{n^2-1}{12}
+  .
+  \end{align*}
+  
+(c)\\
+\begin{align*}
+  EX&=\int_{0}^{2}x\frac{3}{2}(x-1)^2\,dx\\
+  &=\int_{0}^{2}(\frac{3}{2}x^3-3x^2+\frac{3}{2}x)\,dx\\
+  &=(\frac{1}{4}\times \frac{3}{2}x^4-x^3+\frac{1}{2}\times \frac{3}{2}x^2)|_0^2\\
+  &=6-8+3=1\\
+  EX^2&=\int_{0}^{2}x^2\frac{3}{2}(x-1)^2\,dx\\
+  &=\frac{3}{2}\int_{0}^{2}(x^4-2x^3+x^2)\,dx\\
+  &=\frac{3}{2}(\frac{1}{5}x^5-\frac{1}{4}\times 2x^4+\frac{1}{3}x^3)|_0^2\\
+  &=\frac{3}{2}(\frac{32}{5}-8+\frac{8}{3})=\frac{8}{5}\\
+  VarX&=EX^2-(EX)^2=\frac{8}{5}-1=\frac{3}{5}
+  .
+  \end{align*}
+       
+          
+\section{Problem 2.28}
+Question:\\ 
+Let $\mu_n$ denote the $nth$ central moment of a random variable
+$X$. Two quantities of interest, in addition to he mean and variance, are\\
+\begin{align*}
+\alpha_3=\frac{\mu_3}{(\mu_2)^{3/2}} \text{ and } \alpha_4=\frac{\mu_4}{\mu_2^2}
+.
+\end{align*}
+The value $\alpha_3$ is called the skewness and $\alpha_4$ is called
+the kurtosis. The skewness meansures the lack of symmetry in the
+pdf(see Exercise 2.26). The kurtosis, although harder to interpret,
+meansures the peakedness or flatness of the pdf.\\
+(a)Show that if a pdf is symmetric about a point $\alpha$, then $\alpha_3=0$\\
+(b)Calculate $\alpha_3$ for $f(x)=e^{-x}, x\geq 0$, a pdf that is
+skewed to the right.\\
+(c)Calculate $\alpha_4$ for each of the following pdfs and comment on
+the peakedness of each.\\
+\begin{align*}
+&f(x)=\frac{1}{\sqrt{2\pi}}e^{-x^2/2}, -\infty<x<\infty\\
+&f(x)=\frac{1}{2}, -1<x<1\\
+&f(x)=\frac{1}{2}e^{-|x|}, -\infty<x<\infty
+.
+\end{align*}
+Ruppert(1987) uses influence functions(see Miscellanea 10.6.4) to
+explore further the meaning of kurtosis, and Groeneveld(1991) uses
+them to explore skewness; see also Balanda and MacGillvray(1988) for
+more on the interpretation of $\alpha_4$.\\
+
+Solution:\\
+(a)\\
+$\alpha_3=0\Leftrightarrow \mu_3=0$\\
+So we just proof $\mu_3=0$\\
+\begin{align*}
+  \mu_3&=\int_{-\infty}^{\infty}(x-a)^3f_X(x)\,dx=\int_{-\infty}^{a}(x-a)^3f_X(x)\,dx+\int_{a}^{\infty}(x-a)^3f_X(x)\,dx\\
+  \text{Let }y&=x-a\\
+  \mu_3&=\int_{-\infty}^{0}y^3f_X(y+a)\,dy+\int_{0}^{\infty}y^3f_X(y+a)\,dy\\
+  \text{Let }y&=-x,dy=-dx\\
+  \mu_3&=\int_{\infty}^{0}-(-x)^3f_X(-x+a)\,dx+\int_{0}^{\infty}y^3f_X(y+a)\,dx\\
+  &=\mu_3=-\int_{0}^{\infty}x^3f_X(-x+a)\,dx+\int_{0}^{\infty}x^3f_X(x+a)\,dx\\
+  \because f_X(x+a)&=f_X(a-x) \therefore \mu_3=0
+  .
+  \end{align*}
+(b)\\
+\begin{align*}
+  EX&=\int_{0}^{\infty}xe^{-x}\,dx\\
+  &=-xe^{-x}|_0^{\infty}+\int_{0}^{\infty}e^{-x}\,dx\\
+  &=-\lim_{x\rightarrow \infty}\frac{x}{e^x}-e^{-x}|_{0}^{\infty}\\
+  &=-\lim_{x\rightarrow \infty}\frac{1}{e^x}-(0-1)=1\\
+  EX^2&=\int_{0}^{\infty}x^2e^{-x}\,dx\\
+  &=-x^2e^{-x}|_0^{\infty}+2 \int_{0}^{\infty}xe^{-x}\,dx\\
+  &=-\lim_{x\rightarrow \infty}\frac{x^2}{e^x}+2EX\\
+  &=-\lim_{x\rightarrow \infty}\frac{2x}{e^x}+2\\
+  &=-\lim_{x\rightarrow \infty}\frac{2}{e^x}+2=2\\
+  VarX&=EX^2-(EX)^2=1\\
+  EX^3&=\int_{0}^{\infty}x^3e^{-x}\,dx=\Gamma(4)=3\times 2\times 1=6\\
+  E(X-EX)^3&=\int_{0}^{\infty}(x^3-3x^2+3x-1)e^{-x}\,dx=EX^3-3EX^2+3EX-1=6-6+3-1=2\\
+  \therefore \alpha_3&=2
+  .
+  \end{align*}
+(c)\\
+(1)\\
+\begin{align*}
+  EX&=0\\
+  \mu_2&=VarX=1\\
+  \mu_4&=E(X-EX)^4=EX^4=\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}}x^4e^{-\frac{x^2}{2}}\,dx\\
+  \text{Let }\frac{x^2}{2}&=t \text{ then }\\
+  \int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}}x^4e^{-\frac{x^2}{2}}\,dx&=\frac{4}{\sqrt{\pi}}\int_{-\infty}^{\infty}t^{\frac{3}{2}}e^{-t}\,dt=\frac{4}{\sqrt{\pi}}\Gamma(\frac{5}{2})=\frac{4}{\sqrt{\pi}}\times \frac{3}{2}\times \frac{1}{2}\Gamma(\frac{1}{2})=\frac{3}{\sqrt{\pi}}\Gamma(\frac{1}{2})\\
+  \Gamma(\frac{1}{2})&=\int_{0}^{\infty}e^{-x}x^{-\frac{1}{2}}\,dx\\
+  \text{Let }\sqrt{x}&=t,\text{ then }dx=2tdt\\
+  \Gamma(\frac{1}{2})&=\int_{0}^{\infty}\frac{1}{t}2te^{-t^2}\,dt=\int_{-\infty}^{\infty}e^{-t^2}\,dt\\
+  \text{Let }t&=\frac{x}{\sqrt{2}}\\
+  \int_{-\infty}^{\infty}e^{-t^2}\,dt&=\frac{1}{\sqrt{2}}\int_{-\infty}^{\infty}e^{-\frac{x^2}{2}}\,dx=\sqrt{2\pi}\frac{1}{\sqrt{2}}=\sqrt{\pi}\\
+  \therefore EX^4&=\frac{3}{\sqrt{\pi}}\Gamma(\frac{1}{2})=\frac{3}{\sqrt{\pi}}\times \sqrt{\pi}=3\\
+  \therefore \alpha_4&=\frac{\mu_4}{\mu_2^2}=3
+  .
+  \end{align*}
+(2)\\
+\begin{align*}
+  EX&=\int_{-1}^{1}x\times \frac{1}{2}\,dx=\frac{1}{2}\times \frac{1}{2}x^2|_{-1}^{1}=0\\
+  \mu_2&=E(X-EX)^2=EX^2=\int_{-1}^{1}\frac{1}{2}x^2\,dx=\int_{0}^{1}x^2\,dx=\frac{1}{3}x^3|_{0}^{1}=\frac{1}{3}\\
+  \mu_4&=E(X-EX)^4=EX^4=\int_{-1}^{1}\frac{1}{2}x^4\,dx=\int_{0}^{1}x^4\,dx=\frac{1}{5}x^5|_{0}^{1}=\frac{1}{5}\\
+  \therefore \alpha_4&=\frac{\mu_4}{\mu_2^2}=\frac{9}{5}
+  .
+  \end{align*}
+(3)\\
+\begin{align*}
+  EX&=\int_{-\infty}^{\infty}x\times \frac{1}{2}e^{-|x|}\,dx=0\\
+  \mu_2&=E(X-EX)^2=EX^2=\int_{-\infty}^{\infty}x^2\times \frac{1}{2}e^{-|x|}\,dx=\int_{0}^{\infty}x^2e^{-x}\,dx=\Gamma(3)=2!=2\\
+  \mu_4&=E(X-EX)^4=EX^4=\int_{-\infty}^{\infty}x^4\times \frac{1}{2}e^{-|x|}\,dx=\int_{0}^{\infty}x^4e^{-x}\,dx=\Gamma(5)=4!=24\\
+  \therefore \alpha_4&=\frac{\mu_4}{\mu_2^2}=\frac{24}{4}=6
+  .
+  \end{align*}
+     
+         
+\section{Problem 2.32}
+Question:\\
+Let $M_X(t)$ be the moment generating function of $X$, and
+define$S(t)=\log(M_X(t))$. Show that\\
+\begin{align*}
+\frac{d}{dt}S(t)|_{t=0}=EX \text{ and }\frac{d^2}{dt^2}S(t)|_{t=0}=Var(X)
+.
+\end{align*}
+Proof:\\
+\begin{align*}
+  \frac{d}{dt}S(t)&=\frac{1}{M_X(t)}\frac{d}{dt}M_X(t)\\
+  \because \frac{d}{dt}M_X(t)&=\int_{-\infty}^{\infty}\frac{d}{dt}e^{tx}f(x)\,dx=\int_{-\infty}^{\infty}xe^{tx}f(x)\,dx\\
+  \therefore \frac{d}{dt}S(t)&=\frac{1}{M_X(t)}\int_{-\infty}^{\infty}xe^{tx}f(x)\,dx\\
+  \therefore \frac{d}{dt}S(t)|_{t=0}&=\frac{1}{M_X(0)}\int_{-\infty}^{\infty}xe^{0}f(x)\,dx=\int_{-\infty}^{\infty}xf(x)\,dx=EX\\
+  \because \frac{d}{dt}S(t)&=\frac{1}{M_X(t)}\int_{-\infty}^{\infty}xe^{tx}f(x)\,dx\\
+  \therefore \frac{d^2}{dt^2}S(t)&=-\frac{\frac{d}{dt}M_X(t)}{(M_X(t))^2}\int_{-\infty}^{\infty}xe^{tx}f(x)\,dx+\frac{1}{M_X(t)}\int_{-\infty}^{\infty}\frac{d}{dt}xe^{tx}f(x)dx\\
+  \therefore \frac{d^2}{dt^2}S(t)|_{t=0}&=-(EX)^2+EX^2=VarX
+  .
+  \end{align*}
+\section{Problem 2.33}
+Question:\\
+In each of the following cases verify the expression given for the
+moment generating function, and in each case use the mgf to calculate
+$EX$ and $VarX$.\\
+(a)$P(X=x)=\frac{e^{\lambda}\lambda^x}{x!}, M_X(t)=e^{\lambda(e^t-1)},
+x=0,1, \cdots ; \lambda>0$\\
+(b)$P(X=x)=p(1-p)^x, M_X(t)=\frac{p}{1-(1-p)e^t}, x=0,1, \cdots ; 0<p<1$\\ 
+(c)$f_X(x)=\frac{e^{-(x-\mu)^2}/(2\sigma^2)}{\sqrt{2\pi}\sigma},
+M_X(t)=e^{\mu t+\sigma^2 t^2/2}, -\infty<x<\infty; -\infty<\mu<\infty, \sigma>0$\\
+Solution:\\
+(a)\\
+\begin{align*}
+  M_X(t)&=\Sigma_{x=0}^{\infty}e^{tx}\frac{e^{-\lambda}\lambda^x}{x!}=e^{-\lambda}\Sigma_{x=0}^{\infty}\frac{(e^t\lambda)^x}{x!}=e^{-\lambda}e^{e^t\lambda}=e^{\lambda(e^t-1)}\\
+  EX&=\frac{d}{dt}M_X(t)|_{t=0}=e^{-\lambda}\lambda e^te^{e^t\lambda}|_{t=0}=\lambda\\
+  EX^2&=\frac{d^2}{dt^2}M_X(t)|_{t=0}=e^{-\lambda}\lambda
+  e^te^{e^t\lambda}+e^{-\lambda}\lambda e^t(\lambda e^t)e^{e^t\lambda}|_{t=0}=\lambda(1+\lambda)\\
+  VarX&=EX^2-(EX)^2=\lambda
+  .
+  \end{align*}
+(b)\\
+\begin{align*}
+  M_X(t)&=\Sigma_{x=0}^{\infty}e^{tx}p(1-p)^x=p\Sigma_{x=0}^{\infty}[e^t(1-p)]^x=\frac{p}{1-e^t(1-p)}, \text{ if }t<-\log(1-p)\\
+  EX&=\frac{d}{dt}M_X(t)|_{t=0}=\frac{e^t(1-p)p}{[1-e^t(1-p)]^2}|_{t=0}=\frac{1-p}{p}\\
+  EX^2&=\frac{d^2}{dt^2}M_X(t)|_{t=0}\\
+  &=\frac{e^t(1-p)p[1-e^t(1-p)]^2+2[1-e^t(1-p)][e^t(1-p)]^2p}{[1-e^t(1-p)]^4}|_{t=0}\\
+  &=\frac{p^3(1-p)+2p^2(1-p)^2}{p^4}\\
+  &=\frac{p^2-3p+2}{p^2}\\
+  \therefore VarX&=EX^2-(EX)^2=\frac{1-p}{p^2}
+  .
+  \end{align*}
+(c)\\
+%\begin{verbatim}
+\begin{align*}
+  M_X(t)&=\int_{-\infty}^{\infty}e^{tx}\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}\,dx\\
+  &=\frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^{\infty}e^{tx-\frac{(x-\mu)^2}{2\sigma^2}}\,dx\\
+  &=\frac{1}{\sqrt{2\pi}\sigma}e^{\frac{(\mu+\sigma^2t)^2-\mu^2}{2\sigma^2}}\int_{-\infty}^{\infty}e^{-\frac{[x-(\mu+\sigma^2t)]^2}{2\sigma^2}}\,dx\\
+ \text{Let }I&=\int_{-\infty}^{\infty}e^{-\frac{[x-(\mu+\sigma^2t)]^2}{2\sigma^2}}\,dx\\
+  \text{Then }I&=\int_{-\infty}^{\infty}e^{-\frac{[\frac{x-(\mu+\sigma^2t)}{\sigma}]^2}{2}}\,dx\\
+  \text{Let }y&=\frac{x-(\mu+\sigma^2t)}{\sigma}\\
+  \text{Then } dx&=\sigma dy, I=\int_{-\infty}^{\infty}\sigma e^{-\frac{y^2}{2}}\,dy=\sqrt{2\pi}\sigma\\
+  M_X(t)&=e^{\frac{(\mu+\sigma^2t)^2-\mu^2}{2\sigma^2}}=e^{\mu t+\sigma^2t^2/2}\\
+  EX&=\frac{d}{dt}M_X(t)|_{t=0}=(\mu+\sigma^2t)e^{\mu t+\sigma^2t^2/2}|_{t=0}=\mu\\
+  EX^2&=\frac{d^2}{dt^2}M_X(t)|_{t=0}=\sigma^2e^{\mu t+\sigma^2t^2}+(\mu+\sigma^2t)^2e^{\mu t+\sigma^2t^2}|_{t=0}=\sigma^2+\mu^2\\
+  VarX&=EX^2-(EX)^2=\sigma^2
+  .
+  \end{align*}
+ % \end{verbatim}
+\section{Problem 2.38}
+Question:\\
+Let $X$ have the negative binomial distribution with pmf
+\begin{align*} 
+f(x)=\left( \begin{array}{c} r+x-1 \\ x \end{array}
+ \right)p^r(1-p)^x, x=0,1,2, \cdots
+.
+\end{align*}
+where $0<p<1 \text{ and }r>0$ is an integre\\
+(a)Calculate the mgf of $X$\\
+(b)Define a new random variable by $Y=2pX$. Show that, as $p\downarrow
+0$, the mgf of $Y$ converges to that of a chi squared random variable
+with $2r$ degrees of freedom by showing that\\
+\begin{align*}
+\lim_{p\rightarrow 0}M_Y(t)=(\frac{1}{1-2t})^r, |t|<\frac{1}{2}
+.
+\end{align*}
+Solution:\\
+(a)\\
+\begin{align*}
+  M_X(t)&=\Sigma_{x=0}^{\infty}e^{tx}\left( \begin{array}{c} r+x-1 \\ x \end{array} \right)p^r(1-p)^{x}\\
+  &=\Sigma_{x=0}^{\infty}\left( \begin{array}{c} r+x-1 \\ x \end{array} \right)e^{tx}p^r(1-p)^{x}\\
+  &=\Sigma_{x=0}^{\infty}\left( \begin{array}{c} r+x-1 \\ x \end{array} \right)[e^t(1-p)]^{x}e^{tr}p^r\\
+  &=\frac{p^r}{[1-(1-p)e^t]^r}\Sigma_{x=0}^{\infty}\left( \begin{array}{c} r+x-1 \\ x \end{array} \right)[(1-p)e^t]^{x}[1-(1-p)e^t]^r\\
+  &=\frac{p^r}{[1-(1-p)e^t]^r}
+  .
+  \end{align*}
+(b)\\
+\begin{align*}
+  M_Y(t)&=E(e^{ty})=E(e^{2ptx})\\
+  & \text{From the result of (a) we know that }\\
+  &E(e^{2ptx})=\frac{p^r}{[1-(1-p)e^{2pt}]^r}\\
+  M_Y(t)&=\frac{p^r}{[1-(1-p)e^{2pt}]^r}\\
+  \lim_{p\rightarrow0}M_Y(t)&=\lim_{p\rightarrow 0}\frac{p^r}{[1-(1-p)e^{2pt}]^r}\\
+  &=[\lim_{p\rightarrow 0}\frac{p}{1-(1-p)e^{2pt}}]^r\\
+  &=[\lim_{p\rightarrow 0}\frac{1}{e^{2pt}-2t(1-p)e^{2pt}}]^r\\
+  &=[\frac{1}{1-2t}]^r\\
+  &\therefore p\downarrow0, \text{ the mgf of } Y\text{converges to
+    that of a chi squared random variable with }2r\text{ degrees of
+    freedom}. 
+ .
+ \end{align*}
+
+  
+
+
+
+\end{document}

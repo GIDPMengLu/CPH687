@@ -1,0 +1,189 @@
+\documentclass{article}
+\usepackage[pdftex]{graphicx}
+\usepackage{rotating}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{fullpage}
+\usepackage{Sweave}
+\usepackage{pdflscape}
+\usepackage{amsmath}   
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{ctable}
+\newcommand{\fg}[3]{\begin{figure}[htbp]%
+        \leavevmode%
+        \centerline{\includegraphics{#1}}%
+        \caption{#3}%
+        \label{#2}%
+        \end{figure}}
+%\fgh{basefilename}{label}{caption}{short caption for TOC}
+\newcommand{\fgh}[4]{\begin{figure}[htbp]%
+        \leavevmode%
+        \centerline{\includegraphics{#1}}%
+        \caption[#4]{#3}%
+        \label{#2}%
+        \end{figure}}
+\begin{document} 
+\SweaveOpts{concordance=TRUE}
+\SweaveOpts{fig=FALSE, results=hide, echo=TRUE}
+
+\title{CPH687 Homework 3}
+%\author[1]{\small{Bruce Barber}}
+\author{\small{Meng Lu}}
+
+\affil{\footnotesize{GIDP Statistics \\ Email: menglu@email.arizona.edu}}
+%\affil[2]{\footnotesize{Department of Pediatric, The University of Arizona}}
+%\affil[2]{\footnotesize{Statistical Consulting Laboratory \\ email: zlu@arizona.edu}}
+
+\maketitle
+\section{Problem 1}
+Question: \\ 
+Let $\bm{X}$ be $n\times p$. Verify that \\
+(a)$\Re(\bm{X})=\Re(\bm{XX^{\prime}})$\\
+(b)$N(\bm{X})=N(X^{\prime}X)$\\
+     
+Proof:\\
+(a)\\
+(b)\\
+     
+       
+     
+    
+            
+            
+\section{Problem 2}
+Question:\\ 
+Given that $\bm{X}$ is $\n \times p$, $\Omega$ is p.d., and $W$ is
+n.n.d. Verify the following.\\
+\begin{enumerate}
+  \item $\bm{X^{\prime}\Omega^{-1}XA}=\bm{X^{\prime}\Omega^{-1}XB}\Leftrightarrow
+\bm{XA}=\bm{XB}$, regradless of the column-rank of $\bm{X^{\prime}\Omega^{-1}}$\\
+  \item If $\Re(\bm{X})\subseteq \Re(\bm{W})$, then
+    $\bm{X^{\prime}WXA}=\bm{X^{\prime}WXB}\Leftrightarrow
+    \bm{XA}=\bm{XB}$, regardless of the column-rank of $\bm{X^{\prime}W}$\\
+\end{enumerate}
+Proof:\\
+\begin{enumerate}
+  \item
+    \begin{align*}
+      
+      
+      
+      .
+      \end{align*}
+    
+    
+    
+    
+  \item
+  \begin{align*}
+    
+    
+    .
+    \end{align*}
+
+\end{enumerate}
+       
+       
+     
+      
+
+          
+\section{Problem 3}
+Question:\\
+Let $P$ be a projection operator. Verifty that $\Re(\bm{P})$ and
+$N(\bm{P})$ are disjoint vector spaces.\\
+Proof:\\
+      
+      
+      
+      
+      
+      
+      
+    
+  
+\section{Problem 4}
+Question:\\
+Let $\bm{P}$ be the projection operator that projects onto
+$\Re(\bm{P})$ along $N(\bm{X^{\prime}\Omega^{-1}})$, where $\bm{X}$ is
+$n\times p$ and $\Omega$ is $n \times n$ p.d. Verify that $\bm{PX}=\bm{X}$.\\
+Proof:\\
+
+        
+
+
+
+
+        
+\section{Problem 5}
+Question:\\ 
+Let $\bm{X_{n\times p}}$ have rank $r$ and $\bm{\Omega_{n\times n}}$
+be p.d. Verify that
+$\bm{P}=\bm{(X(X^{\prime}\Omega^{-1})X)^{-}X^{\prime}\Omega^{-1}}$ is
+the projection operator which projects from $\Re^{n}$ onto $R(\bm{X})$
+along $N(\bm{X^{\prime}\Omega^{-1}})$. That is, verify that\\
+\begin{enumerate}
+  \item $\bm{P^2}=\bm{P}$\\
+  \item $R(\bm{P})=R(\bm{X})$\\
+  \item $N(\bm{P})=N(\bm{X^{\prime}\Omega^{-1}})$\\
+  \end{enumerate}
+Proof:\\
+\begin{enumerate}
+  \item
+    \begin{align*}
+      
+      .
+      \end{align*}
+  \item
+    \begin{align*}
+      
+      .
+      \end{align*}
+  \item
+    \begin{align*}
+      
+      .
+      \end{align*}
+  
+  \end{enumerate}
+      
+
+
+
+
+\section{Problem 6}
+Question:\\
+Let
+$\bm{S}=\bm{y^{\prime}\Omega^{-1}y}-2\bm{\beta^{\prime}X^{\prime}\Omega^{-1}y}+\bm{\beta^{\prime}X^{\prime}\Omega^{-1}X\beta}$,
+where $y$ is $n \times 1$, $\Omega_{n\times n}$ is n.n.d., and
+$\bm{X}$ is $n\times p$.\\
+\begin{enumerate}
+  \item Find $\bar{\bm{\beta}}$ such that $\frac{\partial{\bm{S}}{\partial{\bm{\beta}}}=0$\\
+  \item Verify $\bar{\bm{\beta}}$ is a minimizer by checking that the
+    second derivative
+    $\frac{\partial^{2}{\bm{S}}}{\partial{\bm{\beta}}\partial{\bm{\beta^{\prime}}}}$
+    is n.n.d.\\
+  
+  \end{enumerate}
+Solution:\\
+\begin{enumerate}
+  \item
+    \begin{align*}
+      
+      
+      .
+      \end{align*}
+  \item
+    \begin{align*}
+      
+      
+      .
+      \end{align*}
+  
+  
+  
+  \end{enumrate}
+\end{document}

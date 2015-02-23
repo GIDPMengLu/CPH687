@@ -1,0 +1,129 @@
+\documentclass{article}
+\usepackage[pdftex]{graphicx}
+\usepackage{rotating}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{multirow}
+\usepackage{fullpage}
+\usepackage{Sweave}
+\usepackage{pdflscape}
+\usepackage{amsmath}   
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{ctable}
+\newcommand{\fg}[3]{\begin{figure}[htbp]%
+        \leavevmode%
+        \centerline{\includegraphics{#1}}%
+        \caption{#3}%
+        \label{#2}%
+        \end{figure}}
+\newcommand{\fgh}[4]{\begin{figure}[htbp]%
+        \leavevmode%
+        \centerline{\includegraphics{#1}}%
+        \caption[#4]{#3}%
+        \label{#2}%
+        \end{figure}}
+\begin{document} 
+\input{CPH687Homework2-concordance}
+
+
+\title{CPH 687 Homework 2}
+%\author[1]{\small{Bruce Barber}}
+\author{\small{Meng Lu}}
+
+\affil{\footnotesize{GIDP Statistics \\ Email: menglu@email.arizona.edu}}
+%\affil[2]{\footnotesize{Department of Pediatric, The University of Arizona}}
+%\affil[2]{\footnotesize{Statistical Consulting Laboratory \\ email: zlu@arizona.edu}}
+
+\maketitle
+\section{Problem 1}
+Question: \\
+Suppose that $\bm{C}$ is nonsingular, show that the eigenvalues of
+$\bm{C^{-1}AC}$ are the same as the eigenvalues of $\bm{A}$\\
+Proof:\\
+     \begin{align*}
+       &\text{Assume that the eigenvalues of }\bm{C^{-1}AC}\text{ are }\lambda\\
+       &\text{Then }\bm{C^{-1}ACx}=\lambda \bm{x}\\
+       \therefore &\bm{ACx}=\lambda \bm{Cx}\\
+       \therefore &\text{The eigenvalues of }\bm{A} \text{ are the same as
+       the eigenvalues of }\bm{C^{-1}AC}
+     .
+     \end{align*}
+     
+    
+            
+            
+\section{Problem 2}
+Question:\\ 
+If the eigenvalues of $\bm{A}$ satisfy $|\lambda_i|<1$ for all
+$\bm{A}$ is diagonable, show that $(\bm{I-A})^{-1}=\Sigma_{i=0}^{\infty}A^i$\\
+Proof:\\
+   \begin{align*}
+     \because &\bm{A} is diagonable\\
+     \therefore \bm{A}&=\bm{T\Lambda T^{\prime}}\\
+     \bm{A^i}&=\bm{T\Lambda^i T^{\prime}}\\
+     \therefore \Sigma_{i=0}^{\infty}\bm{A^i}&=\bm{T}\Sigma_{i=0}^{\infty}\bm{\lambda^i}\bm{T^{i}}\\
+     (\bm{I}-\bm{A})^{-1}&=(\bm{T}(\bm{I}-\bm{\Lambda})\bm{T^{\prime}})^{-1}\\
+     &=\bm{T}(\bm{I}-\bm{\Lambda})^{-1}\bm{T^{\prime}}\\
+     (\bm{I}-\bm{\Lambda})^{-1}&=(diag(1-\lambda_{1},1-\lambda_{2}, \cdots, 1-\lambda_{n}))^{-1}\\
+     &=diag(\frac{1}{1-\lambda_{1}},\frac{1}{1-\lambda_{2}}, \cdots, \frac{1}{1-\lambda_{n}})\\
+     \Sigma_{i=0}^{\infty}\bm{\Lambda}^{i}&=diag(\Sigma_{i=0}^{\infty}\lambda_{1}^{i},\Sigma_{i=0}^{\infty}\lambda_{2}^{i},
+     \cdots, \Sigma_{i=0}^{\infty}\lambda_{n}^{i})\\
+     &=diag(\frac{1}{1-\lambda_{1}},\frac{1}{1-\lambda_{2}}, \cdots, \frac{1}{1-\lambda_{n}})\\
+     \therefore (\bm{I-\Lambda})^{-1}&=\Sigma_{i=0}^{\infty}\Lambda^i\\
+     \therefore (\bm{I-A})^{-1}&=\Sigma_{i=0}^{\infty}A^i
+     .
+     \end{align*}
+     
+          
+\section{Problem 3}
+Question:\\
+Let $Q(\bm{t})=\frac{t^{\prime}\bm{A}t}{t^{\prime}\bm{M}t}$, where
+$\bm{M_{n\times n}}$ is positive definite and $\bm{A_{n\times n}}$ is
+symmetric. Then, show that\\
+\begin{align*}
+  &\max_{\bm{t}\neq 0}Q(\bm{t})=\lambda_1 \text{ and }\min_{\bm{t}\neq 0}Q(\bm{t})=\lambda_n
+  .
+  \end{align*}\\
+where $\lambda_1\geq \lambda_2 \geq \cdots \geq \lambda_n$ are the
+eigenvalues of $\bm{M^{-1}A}$.\\
+Proof:\\
+\begin{align*}
+  &\because \bm{M} \text{ is positive definite}\\
+  &\therefore \text{There exists invertible matrix }\bm{C} \text{ such
+    that }\bm{M}=\bm{C^{\prime}C}\\
+  &\therefore Q(\bm{t})=\frac{t^{\prime}\bm{A}t}{t^{\prime}\bm{C^{\prime}C}t}\\
+  &\text{Let }\bm{y}=\bm{Ct}\\
+  &\text{Then }\bm{t}=\bm{C^{\prime}y}\\
+  &\therefore Q(\bm{t})=Q(\bm{y})=\frac{\bm{y^{\prime}}(\bm{C^{-1}})^{\prime}\bm{A}\bm{C^{-1}y}}{\bm{y^{\prime}y}}\\
+  &\therefore \max_{\bm{y}\neq 0}Q(\bm{y})=\alpha_1 \text{ and }\min_{\bm{y}\neq 0}Q(\bm{y})=\alpha_n\\
+  &  \text{where }\alpha_1\geq \alpha_2 \geq \cdots \geq \alpha_n
+  \text{ are the eigenvalues of }
+(\bm{C^{-1}})^{\prime}\bm{A}\bm{C^{-1}}\\
+&\because \text{the eigenvalues of }\bm{AB} \text{ are equal to the
+  eigenvalues of }\bm{BA}\\
+&\therefore \text{the eigenvalues of }(\bm{C^{-1}})^{\prime}\bm{A}\bm{C^{-1}} \text{ are equal to the
+  eigenvalues of }\bm{C^{-1}} (\bm{C^{-1}})^{\prime}\bm{A}\\
+  &\because \bm{C^{-1}} (\bm{C^{-1}})^{\prime}=\bm{M^{-1}}\\
+  &\therefore \lambda_{i}=\alpha_i (i=1,2,\cdots,n)\\
+  &\therefore \max_{\bm{t}\neq 0}Q(\bm{t})=\lambda_1 \text{ and }\min_{\bm{t}\neq 0}Q(\bm{t})=\lambda_n
+  .
+  \end{align*}
+
+  
+\section{Problem 4}
+Question:\\
+Given that $\bm{X_{n\times p}}$ has full rank, show $\bm{X^{\prime}X}$
+is positive definite.\\
+Proof:\\
+\begin{align*}
+  \because &\bm{X}\text{ has full rank}\\
+  \therefore &\bm{Xt}\neq 0 (\bm{t}\neq 0)\\
+  \therefore &\bm{t^{\prime}X^{\prime}Xt}=(\bm{Xt})^{\prime}(\bm{Xt})>0\\
+  \therefore &\bm{X^{\prime}X}\text{ is positive definite}
+  .
+  \end{align*}
+
+\end{document}
